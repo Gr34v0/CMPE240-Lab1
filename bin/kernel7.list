@@ -1,0 +1,43 @@
+
+build/output.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00008000 <_start>:
+    8000:	e3a0d902 	mov	sp, #32768	; 0x8000
+    8004:	eb000014 	bl	805c <main>
+
+00008008 <hang>:
+    8008:	eafffffe 	b	8008 <hang>
+
+0000800c <convert_pin_to_gpio>:
+    800c:	e6ef3070 	uxtb	r3, r0
+    8010:	e3530028 	cmp	r3, #40	; 0x28
+    8014:	93083060 	movwls	r3, #32864	; 0x8060
+    8018:	83a000ff 	movhi	r0, #255	; 0xff
+    801c:	93403000 	movtls	r3, #0
+    8020:	97d30000 	ldrbls	r0, [r3, r0]
+    8024:	e6af0070 	sxtb	r0, r0
+    8028:	e12fff1e 	bx	lr
+
+0000802c <convert_gpio_to_pin>:
+    802c:	e6ef3070 	uxtb	r3, r0
+    8030:	e353001c 	cmp	r3, #28
+    8034:	93083060 	movwls	r3, #32864	; 0x8060
+    8038:	83a000ff 	movhi	r0, #255	; 0xff
+    803c:	93403000 	movtls	r3, #0
+    8040:	90833000 	addls	r3, r3, r0
+    8044:	95d30028 	ldrbls	r0, [r3, #40]	; 0x28
+    8048:	e6af0070 	sxtb	r0, r0
+    804c:	e12fff1e 	bx	lr
+
+00008050 <mmio_write>:
+    8050:	e5801000 	str	r1, [r0]
+    8054:	e12fff1e 	bx	lr
+
+00008058 <delay>:
+    8058:	e12fff1e 	bx	lr
+
+0000805c <main>:
+    805c:	eafffffe 	b	805c <main>
