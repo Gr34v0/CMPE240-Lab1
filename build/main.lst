@@ -28,20 +28,25 @@
   30              		.arm
   32              	main:
   33              		@ Volatile: function does not return.
-  34              		@ args = 0, pretend = 0, frame = 0
+  34              		@ args = 0, pretend = 0, frame = 8
   35              		@ frame_needed = 0, uses_anonymous_args = 0
   36              		@ link register save eliminated.
   37 0000 0020A0E3 		mov	r2, #0
-  38 0004 202F43E3 		movt	r2, 16160
-  39 0008 0230A0E1 		mov	r3, r2
-  40 000c 001092E5 		ldr	r1, [r2]
-  41 0010 021C81E3 		orr	r1, r1, #512
-  42 0014 001082E5 		str	r1, [r2]
-  43              	.L3:
-  44 0018 1C2093E5 		ldr	r2, [r3, #28]
-  45 001c 1C2083E5 		str	r2, [r3, #28]
-  46 0020 1C2093E5 		ldr	r2, [r3, #28]
-  47 0024 082082E3 		orr	r2, r2, #8
+  38 0004 08D04DE2 		sub	sp, sp, #8
+  39 0008 202F43E3 		movt	r2, 16160
+  40 000c A030A0E3 		mov	r3, #160
+  41 0010 04308DE5 		str	r3, [sp, #4]
+  42 0014 0230A0E1 		mov	r3, r2
+  43 0018 001092E5 		ldr	r1, [r2]
+  44 001c 021C81E3 		orr	r1, r1, #512
+  45 0020 001082E5 		str	r1, [r2]
+  46              	.L3:
+  47 0024 1C2093E5 		ldr	r2, [r3, #28]
   48 0028 1C2083E5 		str	r2, [r3, #28]
-  49 002c F9FFFFEA 		b	.L3
-  51              		.ident	"GCC: (Linaro GCC 5.3-2016.02) 5.3.1 20160113"
+  49 002c 04209DE5 		ldr	r2, [sp, #4]
+  50 0030 1C2093E5 		ldr	r2, [r3, #28]
+  51 0034 082082E3 		orr	r2, r2, #8
+  52 0038 1C2083E5 		str	r2, [r3, #28]
+  53 003c 04209DE5 		ldr	r2, [sp, #4]
+  54 0040 F7FFFFEA 		b	.L3
+  56              		.ident	"GCC: (Linaro GCC 5.3-2016.02) 5.3.1 20160113"

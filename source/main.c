@@ -23,6 +23,9 @@ void delay(uint32_t count)
 
 int main()
 {
+
+    volatile uint32_t countValue = 160;
+
 	// Select output mode and which pin to Drive
     gpio[GPFSEL0] |= (001 << 9);
         
@@ -33,13 +36,13 @@ int main()
         gpio[GPSET0] |= (0 << 3);
 
         //apply a delay
-        delay(160);
+        delay(countValue);
 
         //toggle set register for the chosen pin
         gpio[GPSET0] |= (1 << 3);
 
         //apply a delay
-        delay(160);
+        delay(countValue);
     }
     
     return 0;

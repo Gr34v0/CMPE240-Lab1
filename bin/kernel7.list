@@ -14,7 +14,7 @@ Disassembly of section .text:
 0000800c <convert_pin_to_gpio>:
     800c:	e6ef3070 	uxtb	r3, r0
     8010:	e3530028 	cmp	r3, #40	; 0x28
-    8014:	9308308c 	movwls	r3, #32908	; 0x808c
+    8014:	930830a0 	movwls	r3, #32928	; 0x80a0
     8018:	83a000ff 	movhi	r0, #255	; 0xff
     801c:	93403000 	movtls	r3, #0
     8020:	97d30000 	ldrbls	r0, [r3, r0]
@@ -24,7 +24,7 @@ Disassembly of section .text:
 0000802c <convert_gpio_to_pin>:
     802c:	e6ef3070 	uxtb	r3, r0
     8030:	e353001c 	cmp	r3, #28
-    8034:	9308308c 	movwls	r3, #32908	; 0x808c
+    8034:	930830a0 	movwls	r3, #32928	; 0x80a0
     8038:	83a000ff 	movhi	r0, #255	; 0xff
     803c:	93403000 	movtls	r3, #0
     8040:	90833000 	addls	r3, r3, r0
@@ -41,14 +41,19 @@ Disassembly of section .text:
 
 0000805c <main>:
     805c:	e3a02000 	mov	r2, #0
-    8060:	e3432f20 	movt	r2, #16160	; 0x3f20
-    8064:	e1a03002 	mov	r3, r2
-    8068:	e5921000 	ldr	r1, [r2]
-    806c:	e3811c02 	orr	r1, r1, #512	; 0x200
-    8070:	e5821000 	str	r1, [r2]
-    8074:	e593201c 	ldr	r2, [r3, #28]
-    8078:	e583201c 	str	r2, [r3, #28]
-    807c:	e593201c 	ldr	r2, [r3, #28]
-    8080:	e3822008 	orr	r2, r2, #8
+    8060:	e24dd008 	sub	sp, sp, #8
+    8064:	e3432f20 	movt	r2, #16160	; 0x3f20
+    8068:	e3a030a0 	mov	r3, #160	; 0xa0
+    806c:	e58d3004 	str	r3, [sp, #4]
+    8070:	e1a03002 	mov	r3, r2
+    8074:	e5921000 	ldr	r1, [r2]
+    8078:	e3811c02 	orr	r1, r1, #512	; 0x200
+    807c:	e5821000 	str	r1, [r2]
+    8080:	e593201c 	ldr	r2, [r3, #28]
     8084:	e583201c 	str	r2, [r3, #28]
-    8088:	eafffff9 	b	8074 <main+0x18>
+    8088:	e59d2004 	ldr	r2, [sp, #4]
+    808c:	e593201c 	ldr	r2, [r3, #28]
+    8090:	e3822008 	orr	r2, r2, #8
+    8094:	e583201c 	str	r2, [r3, #28]
+    8098:	e59d2004 	ldr	r2, [sp, #4]
+    809c:	eafffff7 	b	8080 <main+0x24>
