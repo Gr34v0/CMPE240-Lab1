@@ -10,6 +10,7 @@
 // Write a function that will delay for n loops
 // to satisfy timing constraints given in lab. 
 // ....beware compiler optimization....
+
 void delay(uint32_t count)
 {   
     uint32_t x = 0;
@@ -17,25 +18,25 @@ void delay(uint32_t count)
              // 1200MHz. 4 instructions/cycle. loop 40 cycles
     {
         x = x + 1;
-    } 
+    }
 }
 
 int main()
 {
 	// Select output mode and which pin to Drive
-    gpio[GPFSEL1] |= (001 << 21);
+    gpio[GPFSEL0] |= (001 << 9);
         
     while (1)
     {       
         //toggle clear register for the chosen pin
-        // GPIO17 bits 23-21  bit 001 = output
-        gpio[GPCLR0] |= (1 << 17);
+        // GPIO3 bits 11-9  bit 001 = output
+        gpio[GPSET0] |= (0 << 3);
 
         //apply a delay
         delay(160);
 
         //toggle set register for the chosen pin
-        gpio[GPSET1] |= (0 << 17);
+        gpio[GPSET0] |= (1 << 3);
 
         //apply a delay
         delay(160);
