@@ -1,8 +1,8 @@
 /** 
 * Lab 1 - GPIO Blinky
 * - Drive an LED by GPIO
-* - Developer - 
-* - Date - 
+* - Developer - Christian Greaves
+* - Date - 2/9/2017
 * 
 */
 #include "gpio.h"
@@ -23,19 +23,19 @@ void delay(uint32_t count)
 int main()
 {
 	// Select output mode and which pin to Drive
-    GPIO[GPFSEL1] |= (001 << 21);
+    gpio[GPFSEL1] |= (001 << 21);
         
     while (1)
     {       
         //toggle clear register for the chosen pin
         // GPIO17 bits 23-21  bit 001 = output
-        GPIO[GPCLR0] |= (1 << 17);
+        gpio[GPCLR0] |= (1 << 17);
 
         //apply a delay
         delay(160);
 
         //toggle set register for the chosen pin
-        GPIO[GPSET1] |= (0 << 17);
+        gpio[GPSET1] |= (0 << 17);
 
         //apply a delay
         delay(160);
