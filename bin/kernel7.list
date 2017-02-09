@@ -6,7 +6,7 @@ Disassembly of section .text:
 
 00008000 <_start>:
     8000:	e3a0d902 	mov	sp, #32768	; 0x8000
-    8004:	eb000014 	bl	805c <main>
+    8004:	eb000020 	bl	808c <main>
 
 00008008 <hang>:
     8008:	eafffffe 	b	8008 <hang>
@@ -14,7 +14,7 @@ Disassembly of section .text:
 0000800c <convert_pin_to_gpio>:
     800c:	e6ef3070 	uxtb	r3, r0
     8010:	e3530028 	cmp	r3, #40	; 0x28
-    8014:	930830a0 	movwls	r3, #32928	; 0x80a0
+    8014:	93083128 	movwls	r3, #33064	; 0x8128
     8018:	83a000ff 	movhi	r0, #255	; 0xff
     801c:	93403000 	movtls	r3, #0
     8020:	97d30000 	ldrbls	r0, [r3, r0]
@@ -24,7 +24,7 @@ Disassembly of section .text:
 0000802c <convert_gpio_to_pin>:
     802c:	e6ef3070 	uxtb	r3, r0
     8030:	e353001c 	cmp	r3, #28
-    8034:	930830a0 	movwls	r3, #32928	; 0x80a0
+    8034:	93083128 	movwls	r3, #33064	; 0x8128
     8038:	83a000ff 	movhi	r0, #255	; 0xff
     803c:	93403000 	movtls	r3, #0
     8040:	90833000 	addls	r3, r3, r0
@@ -37,23 +37,57 @@ Disassembly of section .text:
     8054:	e12fff1e 	bx	lr
 
 00008058 <delay>:
-    8058:	e12fff1e 	bx	lr
+    8058:	e24dd010 	sub	sp, sp, #16
+    805c:	e3a03000 	mov	r3, #0
+    8060:	e58d0004 	str	r0, [sp, #4]
+    8064:	ea000001 	b	8070 <delay+0x18>
+    8068:	e59d300c 	ldr	r3, [sp, #12]
+    806c:	e2833001 	add	r3, r3, #1
+    8070:	e58d300c 	str	r3, [sp, #12]
+    8074:	e59d200c 	ldr	r2, [sp, #12]
+    8078:	e59d3004 	ldr	r3, [sp, #4]
+    807c:	e1520003 	cmp	r2, r3
+    8080:	1afffff8 	bne	8068 <delay+0x10>
+    8084:	e28dd010 	add	sp, sp, #16
+    8088:	e12fff1e 	bx	lr
 
-0000805c <main>:
-    805c:	e3a02000 	mov	r2, #0
-    8060:	e24dd008 	sub	sp, sp, #8
-    8064:	e3432f20 	movt	r2, #16160	; 0x3f20
-    8068:	e3a030a0 	mov	r3, #160	; 0xa0
-    806c:	e58d3004 	str	r3, [sp, #4]
-    8070:	e1a03002 	mov	r3, r2
-    8074:	e5921000 	ldr	r1, [r2]
-    8078:	e3811c02 	orr	r1, r1, #512	; 0x200
-    807c:	e5821000 	str	r1, [r2]
-    8080:	e593201c 	ldr	r2, [r3, #28]
-    8084:	e583201c 	str	r2, [r3, #28]
-    8088:	e59d2004 	ldr	r2, [sp, #4]
-    808c:	e593201c 	ldr	r2, [r3, #28]
-    8090:	e3822008 	orr	r2, r2, #8
-    8094:	e583201c 	str	r2, [r3, #28]
-    8098:	e59d2004 	ldr	r2, [sp, #4]
-    809c:	eafffff7 	b	8080 <main+0x24>
+0000808c <main>:
+    808c:	e3a03000 	mov	r3, #0
+    8090:	e24dd010 	sub	sp, sp, #16
+    8094:	e3433f20 	movt	r3, #16160	; 0x3f20
+    8098:	e3042240 	movw	r2, #16960	; 0x4240
+    809c:	e340200f 	movt	r2, #15
+    80a0:	e3a00000 	mov	r0, #0
+    80a4:	e58d2004 	str	r2, [sp, #4]
+    80a8:	e1a01003 	mov	r1, r3
+    80ac:	e5932000 	ldr	r2, [r3]
+    80b0:	e3822c02 	orr	r2, r2, #512	; 0x200
+    80b4:	e5832000 	str	r2, [r3]
+    80b8:	e5913028 	ldr	r3, [r1, #40]	; 0x28
+    80bc:	e3833008 	orr	r3, r3, #8
+    80c0:	e5813028 	str	r3, [r1, #40]	; 0x28
+    80c4:	e59d2004 	ldr	r2, [sp, #4]
+    80c8:	e58d000c 	str	r0, [sp, #12]
+    80cc:	e59d300c 	ldr	r3, [sp, #12]
+    80d0:	e1530002 	cmp	r3, r2
+    80d4:	0a000005 	beq	80f0 <main+0x64>
+    80d8:	e59d300c 	ldr	r3, [sp, #12]
+    80dc:	e2833001 	add	r3, r3, #1
+    80e0:	e58d300c 	str	r3, [sp, #12]
+    80e4:	e59d300c 	ldr	r3, [sp, #12]
+    80e8:	e1530002 	cmp	r3, r2
+    80ec:	1afffff9 	bne	80d8 <main+0x4c>
+    80f0:	e591301c 	ldr	r3, [r1, #28]
+    80f4:	e581301c 	str	r3, [r1, #28]
+    80f8:	e59d2004 	ldr	r2, [sp, #4]
+    80fc:	e58d0008 	str	r0, [sp, #8]
+    8100:	e59d3008 	ldr	r3, [sp, #8]
+    8104:	e1530002 	cmp	r3, r2
+    8108:	0affffea 	beq	80b8 <main+0x2c>
+    810c:	e59d3008 	ldr	r3, [sp, #8]
+    8110:	e2833001 	add	r3, r3, #1
+    8114:	e58d3008 	str	r3, [sp, #8]
+    8118:	e59d3008 	ldr	r3, [sp, #8]
+    811c:	e1530002 	cmp	r3, r2
+    8120:	1afffff9 	bne	810c <main+0x80>
+    8124:	eaffffe3 	b	80b8 <main+0x2c>
