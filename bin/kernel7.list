@@ -55,8 +55,8 @@ Disassembly of section .text:
     808c:	e3a03000 	mov	r3, #0
     8090:	e24dd010 	sub	sp, sp, #16
     8094:	e3433f20 	movt	r3, #16160	; 0x3f20
-    8098:	e3042240 	movw	r2, #16960	; 0x4240
-    809c:	e340200f 	movt	r2, #15
+    8098:	e30b2ba0 	movw	r2, #48032	; 0xbba0
+    809c:	e340200d 	movt	r2, #13
     80a0:	e3a00000 	mov	r0, #0
     80a4:	e58d2004 	str	r2, [sp, #4]
     80a8:	e1a01003 	mov	r1, r3

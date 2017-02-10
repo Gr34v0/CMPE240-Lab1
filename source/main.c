@@ -24,7 +24,7 @@ void delay(volatile uint32_t count)
 int main()
 {
 
-    volatile uint32_t countValue = 1000000;
+    volatile uint32_t countValue = 900000;
 
 	// Select output mode and which pin to Drive
     gpio[GPFSEL0] |= (001 << 9);
