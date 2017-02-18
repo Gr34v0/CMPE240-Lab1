@@ -13,22 +13,25 @@
 
 void delay(volatile uint32_t count)
 {   
-    volatile uint32_t x = 0;
-	while (x != count) //loop x times
-             // 1200MHz. 4 instructions/cycle. loop 40 cycles
+    volatile uint32_t x = 0;    //Volatile flag moves the uint32_t to RAM
+                                //to disable compiler optimization.
+	while (x != count)          //Loop 'count' number of times.
     {
-        x += 1;
+        x += 1;  //Simple implementation. Count up to
+                 //the number provided in the function call to waste time.
     }
 }
 
 int main()
 {
-
-    volatile uint32_t countValue = 900000;
+    volatile uint32_t countValue = 900000; //Arbitrary number that, after testing,
+                                           //turns out to be almost perfect for a 1 second
+                                           //delay on a RPi3 proc @ stock clock speeds.
 
 	// Select output mode and which pin to Drive
-    gpio[GPFSEL0] |= (001 << 9);
-        
+    gpio[GPFSEL0] |= (001 << 9);    //Output mode 001 put on pin 3
+                                    //which is 9 bits over from the start
+                                    //of the GPIO set 0.    
     while (1)
     {       
         //toggle clear register for the chosen pin
@@ -44,6 +47,5 @@ int main()
         //apply a delay
         delay(countValue);
     }
-    
     return 0;
 }
